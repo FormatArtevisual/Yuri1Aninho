@@ -3,23 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <title>Yuri 1 Aninho</title>
-  <meta name="viewport" content="width=1080, height=1920, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=1080, height=1920, initial-scale=1.0">
   <style>
     html, body {
       margin: 0;
       padding: 0;
       background: #000;
-      width: 100%;
       height: 100%;
       overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     #container {
       position: relative;
       width: 1080px;
       height: 1920px;
-      margin: 0 auto;
-      background: #000;
+      background-color: #000;
     }
 
     video {
@@ -34,22 +35,16 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 100px;
-      height: 100px;
       background: rgba(0, 0, 0, 0.5);
       border: none;
       border-radius: 50%;
+      width: 100px;
+      height: 100px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      z-index: 2;
-      transition: 0.3s ease;
-    }
-
-    #playButton:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translate(-50%, -50%) scale(1.05);
+      z-index: 10;
     }
 
     #playButton svg {
@@ -61,36 +56,31 @@
 </head>
 <body>
   <div id="container">
-    <video id="video" preload="auto" playsinline>
-      <source src="video.mp4.mp4" type="video/mp4">
-      Seu navegador não suporta vídeo HTML5.
+    <video id="video" playsinline preload="auto">
+      <source src="video.mp4.video.mp4" type="video/mp4">
+      Seu navegador não suporta vídeo.
     </video>
 
-    <button id="playButton" aria-label="Play">
-      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <button id="playButton">
+      <svg viewBox="0 0 64 64">
         <path d="M16 12v40l36-20z"/>
       </svg>
     </button>
   </div>
 
   <script>
-    const video = document.getElementById('video');
-    const playButton = document.getElementById('playButton');
+    const video = document.getElementById("video");
+    const playButton = document.getElementById("playButton");
 
-    playButton.addEventListener('click', () => {
-      video.muted = false;
-      video.play()
-        .then(() => {
-          playButton.style.display = 'none';
-        })
-        .catch((err) => {
-          alert("Erro ao iniciar o vídeo. Tente tocar na tela novamente.");
-          console.error(err);
-        });
+    playButton.addEventListener("click", async () => {
+      try {
+        await video.play();
+        video.muted = false;
+        playButton.style.display = "none";
+      } catch (e) {
+        alert("O vídeo não pôde ser iniciado automaticamente. Toque novamente.");
+      }
     });
-
-    // Garante que o vídeo esteja pronto para aparecer como fundo
-    video.load();
   </script>
 </body>
 </html>
