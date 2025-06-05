@@ -21,52 +21,64 @@
       height: 1920px;
       object-fit: cover;
       background-color: #000;
+      display: block;
     }
 
-    #playButton {
+    #overlayPlay {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: rgba(0, 0, 0, 0.4);
-      border: 2px solid white;
-      color: white;
-      padding: 20px;
-      font-size: 32px;
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
       border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      z-index: 2;
+      z-index: 10;
       transition: 0.3s ease;
     }
 
-    #playButton:hover {
+    #overlayPlay:hover {
       background: rgba(255, 255, 255, 0.2);
       transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    #overlayPlay svg {
+      width: 40px;
+      height: 40px;
+      fill: white;
     }
   </style>
 </head>
 <body>
 
-  <video id="video" loop playsinline>
+  <video id="video" controls style="display: none;">
     <source src="video.mp4.mp4" type="video/mp4">
-    Seu navegador não suporta vídeos HTML5.
+    Seu navegador não suporta vídeo HTML5.
   </video>
 
-  <button id="playButton">▶</button>
+  <!-- Botão estilo Canva -->
+  <button id="overlayPlay" aria-label="Play">
+    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 12v40l36-20z"/>
+    </svg>
+  </button>
 
   <script>
     const video = document.getElementById('video');
-    const button = document.getElementById('playButton');
+    const playBtn = document.getElementById('overlayPlay');
 
-    button.addEventListener('click', () => {
+    playBtn.addEventListener('click', () => {
+      playBtn.style.display = 'none';
+      video.style.display = 'block';
       video.muted = false;
       video.play();
-      button.style.display = 'none';
     });
-
-    // Inicia silenciosamente o vídeo para já carregar em background
-    video.muted = true;
-    video.play();
   </script>
+
 </body>
 </html>
