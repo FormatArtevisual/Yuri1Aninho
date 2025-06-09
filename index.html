@@ -2,85 +2,43 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Yuri 1 Aninho</title>
-  <meta name="viewport" content="width=1080, height=1920, initial-scale=1.0">
+  <title>Yuri - 1 Aninho 🎉</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
+    body {
       background: #000;
-      height: 100%;
-      overflow: hidden;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
+      height: 100vh;
+      margin: 0;
     }
-
-    #container {
-      position: relative;
-      width: 1080px;
-      height: 1920px;
-      background-color: #000;
-    }
-
-    video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    #playButton {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0, 0, 0, 0.5);
+    button {
+      padding: 14px 28px;
+      font-size: 18px;
+      background-color: #00aaff;
+      color: white;
       border: none;
-      border-radius: 50%;
-      width: 100px;
-      height: 100px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      border-radius: 10px;
       cursor: pointer;
-      z-index: 10;
+      margin-bottom: 20px;
     }
-
-    #playButton svg {
-      width: 40px;
-      height: 40px;
-      fill: white;
+    video {
+      max-width: 90%;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
     }
   </style>
 </head>
 <body>
-  <div id="container">
-    <video id="video" playsinline preload="auto">
-      <source src="video.mp4.video.mp4" type="video/mp4">
-      Seu navegador não suporta vídeo.
-    </video>
+  <button onclick="document.getElementById('video').play(); this.style.display='none';">
+    ▶️ Tocar vídeo
+  </button>
 
-    <button id="playButton">
-      <svg viewBox="0 0 64 64">
-        <path d="M16 12v40l36-20z"/>
-      </svg>
-    </button>
-  </div>
-
-  <script>
-    const video = document.getElementById("video");
-    const playButton = document.getElementById("playButton");
-
-    playButton.addEventListener("click", async () => {
-      try {
-        await video.play();
-        video.muted = false;
-        playButton.style.display = "none";
-      } catch (e) {
-        alert("O vídeo não pôde ser iniciado automaticamente. Toque novamente.");
-      }
-    });
-  </script>
+  <video id="video" controls>
+    <source src="https://raw.githubusercontent.com/FormatArtevisual/Yuri1Aninho/main/yuri.mp4" type="video/mp4">
+    Seu navegador não suporta vídeo HTML5.
+  </video>
 </body>
 </html>
